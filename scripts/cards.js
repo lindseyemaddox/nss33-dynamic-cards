@@ -16,21 +16,35 @@ const lotsOfCreateButtons = document.querySelectorAll(".create-btn");
 if (container !== "") {
   createButton.addEventListener("click", (index) => {
 
-      addComponentToDom(createComponent());
+    addComponentToDom(createComponent(index));
 
+    let deleteButton = document.querySelectorAll(".deleteBtn");
 
+    for(let i = 0; i < deleteButton.length; i++) {
+      deleteButton.addEventListener("click", i => () {
 
-  });
+          let buttonId = event.target.id;
+          let idArray = buttonId.split("-");
+          let idNumber = idArray[1];
+          let parkId = "deleteBtn-" + idNumber;
+          let parkName = document.getElementById(parkId).textContent;
+          deleteComponentFromDom(deleteSearchComponent(parkName));
+
+      });
+    }
+  }
+  );
 }
+
 
 function addComponentToDom(index) {
   document.getElementById("results").innerHTML += index;
 }
 
-function createComponent() {
+function createComponent(index) {
   return `
     <h3>Border Element</h3>
-    <button>Delete</button>
+    <button class="deleteBtn" id="deleteBtn-${index}">Delete</button>
   `;
 }
 
