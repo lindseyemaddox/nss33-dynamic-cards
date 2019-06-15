@@ -21,7 +21,8 @@ if (container !== "") {
     let deleteButton = document.querySelectorAll(".deleteBtn");
 
     for(let i = 0; i < deleteButton.length; i++) {
-      deleteButton.addEventListener("click", i => () {
+      deleteButton.addEventListener("click", function (i) {
+
 
           let buttonId = event.target.id;
           let idArray = buttonId.split("-");
