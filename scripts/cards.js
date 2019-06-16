@@ -12,46 +12,47 @@ const container = document.querySelector("#textarea");
 const createButton = document.querySelector("#create-btn");
 
 if (container !== "") {
-  createButton.addEventListener("click", (index) => {
-    addComponentToDom(createComponent(index));
+  createButton.addEventListener("click", () => {
+    addComponentToDom(createComponent());
 
-      let deleteButton = document.querySelectorAll(".deleteBtn");
+    let deleteButton = document.querySelectorAll(".deleteBtn");
 
-      for(let i=0; i < deleteButton.length; i++) {
-        deleteComponentFromDom(deleteSearchComponent(index[i], i));
-      }
+
+
 
       deleteButton.forEach(button => {
-        button.addEventListener("click", function (i) {
+        button.addEventListener("click", function (button) {
           let buttonId = event.target.id;
           let idArray = buttonId.split("-");
           let idNumber = idArray[1];
           let deleteId = "deleteBtn-" + idNumber;
           let deleteBtn = document.getElementById(deleteId).textContent;
-          deleteComponentFromDom(deleteSearchComponent(deleteBtn));
+          deleteComponentFromDom(deleteSearchComponent(idNumber));
         });
       });
-    });
+
+  });
+    }
+
+
+
+
+
+function addComponentToDom(idNumber) {
+  document.getElementById("results").innerHTML += idNumber;
 }
 
-
-
-
-function addComponentToDom(index) {
-  document.getElementById("results").innerHTML += index;
-}
-
-function createComponent(index) {
+function createComponent(idNumber) {
   return `
-  <div class="border" id="deleteCase-${index}">
+  <div class="border" id="deleteCase-${idNumber}">
     <h3>Border Element</h3>
-    <button class="deleteBtn" id="deleteBtn-${index}">Delete</button>
+    <button class="deleteBtn" id="deleteBtn-${idNumber}">Delete</button>
   </div>
   `;
 }
 
-function deleteComponentFromDom(i) {
-  document.getElementById("results").innerHTML += i;
+function deleteComponentFromDom(idNumber) {
+  document.getElementById("results").innerHTML += idNumber;
 }
 
 function deleteSearchComponent(child) {
