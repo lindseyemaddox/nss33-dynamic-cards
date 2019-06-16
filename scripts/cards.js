@@ -9,6 +9,7 @@
 
 const container = document.querySelector("#textarea");
 const createButton = document.querySelector("#create-btn");
+let inputText = document.querySelector("#textarea").textContent;
 let unique = 0;
 
 if (container !== "") {
@@ -22,10 +23,11 @@ function addComponentToDom(poop) {
   document.getElementById("results").innerHTML += poop;
 }
 
-function createComponent(unique) {
+function createComponent(unique, inputText) {
   return `
   <div class="border" id="deleteCase-${unique}">
     <h3>Border Element</h3>
+    <h4>${inputText}</h4>
     <button class="delete-btn" id="deleteBtn-${unique}">Delete</button>
   </div>
   `;
