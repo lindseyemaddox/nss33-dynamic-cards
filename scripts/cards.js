@@ -1,8 +1,7 @@
 
 // When the user enters in text into the text area and then clicks the create button,
 // use a factory function that creates a new DOM component
-// that has a border,
-// and includes it's own delete button.
+// that has a border, and includes it's own delete button.
 // Insert that new component into the DOM.
 
 // When the user clicks the Delete button, the containing card, and no other cards,
@@ -10,53 +9,26 @@
 
 const container = document.querySelector("#textarea");
 const createButton = document.querySelector("#create-btn");
+let unique = 0;
 
 if (container !== "") {
+  let inputText = container.value;
   createButton.addEventListener("click", () => {
-    addComponentToDom(createComponent());
-
-    let deleteButton = document.querySelectorAll(".deleteBtn");
-
-
-
-
-      deleteButton.forEach(button => {
-        button.addEventListener("click", function (button) {
-          let buttonId = event.target.id;
-          let idArray = buttonId.split("-");
-          let idNumber = idArray[1];
-          let deleteId = "deleteBtn-" + idNumber;
-          let deleteBtn = document.getElementById(deleteId).textContent;
-          deleteComponentFromDom(deleteSearchComponent(idNumber));
-        });
-      });
-
+    unique++;
+    addComponentToDom(createComponent(unique, inputText));
   });
-    }
-
-
-
-
-
-function addComponentToDom(idNumber) {
-  document.getElementById("results").innerHTML += idNumber;
 }
 
-function createComponent(idNumber) {
+function addComponentToDom(poop) {
+  document.getElementById("results").innerHTML += poop;
+}
+
+function createComponent(unique, inputText) {
   return `
-  <div class="border" id="deleteCase-${idNumber}">
+  <div class="border" id="deleteCase-${unique}">
     <h3>Border Element</h3>
-    <button class="deleteBtn" id="deleteBtn-${idNumber}">Delete</button>
+    <h4>${inputText}</h4>
+    <button class="delete-btn" id="deleteBtn-${unique}">Delete</button>
   </div>
-  `;
-}
-
-function deleteComponentFromDom(idNumber) {
-  document.getElementById("results").innerHTML += idNumber;
-}
-
-function deleteSearchComponent(child) {
-  return `
-    ${child}
   `;
 }
