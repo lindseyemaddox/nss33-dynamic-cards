@@ -9,13 +9,13 @@
 
 const container = document.querySelector("#textarea");
 const createButton = document.querySelector("#create-btn");
-let inputText = document.querySelector("#textarea").textContent;
 let unique = 0;
 
 if (container !== "") {
+  let inputText = container.value;
   createButton.addEventListener("click", () => {
     unique++;
-    addComponentToDom(createComponent(unique));
+    addComponentToDom(createComponent(unique, inputText));
   });
 }
 
