@@ -1,17 +1,13 @@
-
 // When the user enters in text into the text area and then clicks the create button,
-// use a factory function that creates a new DOM component
-// that has a border, and includes it's own delete button.
+// use a factory function that creates a new DOM component that has a border and includes it's own delete button.
 // Insert that new component into the DOM.
-
-// When the user clicks the Delete button, the containing card, and no other cards,
-// should then be removed from the DOM. Not just made invisible, actually removed from the DOM. (remove child)
+// When the user clicks the Delete button, the containing card, and no other cards, should then be removed from the DOM.
 
 const container = document.querySelector("#textarea");
 const createButton = document.querySelector("#create-btn");
-let unique = 0;
+const parent = document.querySelector("#results");
 let inputText = "No Text Entered.";
-
+let unique = 0;
 
 createButton.addEventListener("click", () => {
   unique++;
@@ -21,17 +17,17 @@ createButton.addEventListener("click", () => {
   addComponentToDom(createComponent(unique, inputText));
 });
 
-function addComponentToDom(poop) {
-  document.getElementById("results").innerHTML += poop;
+let addComponentToDom = (poop) => {
+  parent.innerHTML += poop;
   let deleteButton = document.querySelectorAll(".delete-btn");
   deleteButton.forEach(button => {
-    button.addEventListener("click", function () {
+    button.addEventListener("click", () => {
       splitsville();
     });
   });
-}
+};
 
-function createComponent(unique) {
+let createComponent = (unique) => {
   return `
   <div class="border" id="deleteCase-${unique}">
     <h3>Border Element</h3>
@@ -39,12 +35,11 @@ function createComponent(unique) {
     <button class="delete-btn" id="deleteBtn-${unique}">Delete</button>
   </div>
   `;
-}
+};
 
-function splitsville() {
-  const parent = document.querySelector("#results");
+let splitsville = () => {
   let idArray = event.target.id.split("-");
   let deleteId = "deleteCase-" + idArray[1];
   let uniqueId = document.getElementById(deleteId);
   parent.removeChild(uniqueId);
-}
+};
