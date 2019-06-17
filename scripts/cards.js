@@ -10,26 +10,28 @@
 const container = document.querySelector("#textarea");
 const createButton = document.querySelector("#create-btn");
 let unique = 0;
+let inputText = "No Text Entered.";
 
-if (container !== "") {
-  let inputText = container.value;
-  createButton.addEventListener("click", () => {
-    unique++;
-    addComponentToDom(createComponent(unique, inputText));
-  });
-}
+
+createButton.addEventListener("click", () => {
+  unique++;
+  if (container.value.length >= 1) {
+    inputText = container.value;
+  }
+  addComponentToDom(createComponent(unique, inputText));
+});
 
 function addComponentToDom(poop) {
   document.getElementById("results").innerHTML += poop;
   let deleteButton = document.querySelectorAll(".delete-btn");
   deleteButton.forEach(button => {
     button.addEventListener("click", function () {
-      splitFactory();
+      splitsville();
     });
   });
 }
 
-function createComponent(unique, inputText) {
+function createComponent(unique) {
   return `
   <div class="border" id="deleteCase-${unique}">
     <h3>Border Element</h3>
@@ -39,13 +41,11 @@ function createComponent(unique, inputText) {
   `;
 }
 
-function splitFactory() {
+function splitsville() {
   const parent = document.querySelector("#results");
   let idArray = event.target.id.split("-");
   let deleteId = "deleteCase-" + idArray[1];
   let uniqueId = document.getElementById(deleteId);
-  console.log(uniqueId);
-
   parent.removeChild(uniqueId);
 }
 
