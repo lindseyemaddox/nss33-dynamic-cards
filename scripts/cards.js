@@ -48,5 +48,3 @@ function splitsville() {
   let uniqueId = document.getElementById(deleteId);
   parent.removeChild(uniqueId);
 }
-
-c
