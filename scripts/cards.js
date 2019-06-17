@@ -21,6 +21,12 @@ if (container !== "") {
 
 function addComponentToDom(poop) {
   document.getElementById("results").innerHTML += poop;
+  let deleteButton = document.querySelectorAll(".delete-btn");
+  deleteButton.forEach(button => {
+    button.addEventListener("click", function () {
+      splitFactory();
+    });
+  });
 }
 
 function createComponent(unique, inputText) {
@@ -32,3 +38,14 @@ function createComponent(unique, inputText) {
   </div>
   `;
 }
+
+function splitFactory() {
+  const parent = document.querySelector("#results");
+  let idArray = event.target.id.split("-");
+  let deleteId = "deleteCase-" + idArray[1];
+  let uniqueId = document.getElementById(deleteId);
+  console.log(uniqueId);
+
+  parent.removeChild(uniqueId);
+}
+
